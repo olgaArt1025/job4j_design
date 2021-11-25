@@ -5,7 +5,4 @@
       <map />
     </option>
   </component>
-  <component name="MavenCustomPomFilePath">
-    <option name="mavenPomFileUrl" value="file://$MODULE_DIR$/pom.xml.bak" />
-  </component>
 </module>
