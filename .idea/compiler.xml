@@ -7,11 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="job4j_design" />
-        <module name="job4j_design (2)" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="job4j_design (1)" target="16" />
+      <module name="job4j_design (2)" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
