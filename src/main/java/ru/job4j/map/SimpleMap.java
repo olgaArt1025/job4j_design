@@ -31,27 +31,24 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int indexFor(int hash) {
-        return hash & (table.length - 1);
+        return hash & (capacity - 1);
     }
 
     private void expand() {
-        if (size >= table.length * LOAD_FACTOR) {
-            MapEntry<K, V>[] newTable = new MapEntry[capacity * 2];
-            for (int i = 0; i < table.length; i++) {
-                if (table[i] != null) {
-                   newTable[indexFor(table[i].hashCode())] = table[i];
-                }
+        MapEntry<K, V>[] newTable = new MapEntry[capacity * 2];
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] != null) {
+                newTable[indexFor(table[i].hashCode())] = table[i];
             }
-            table = newTable;
         }
+        table = newTable;
     }
 
     @Override
     public V get(K key) {
         V result = null;
         int i = hash(key) & (table.length - 1);
-        if (table[i] != null
-                && hash(key) == hash(table[i].key) && Objects.equals(key, table[i].key)) {
+        if (table[i] != null && Objects.equals(key, table[i].key)) {
             result = table[i].value;
         }
         return result;
@@ -61,8 +58,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean remove(K key) {
         boolean rsl = false;
         int i = hash(key) & (table.length - 1);
-        if (table[i] != null
-                && hash(key) == hash(table[i].key) && Objects.equals(key, table[i].key)) {
+        if (table[i] != null && Objects.equals(key, table[i].key)) {
             table[i] = null;
             size--;
             modCount++;
@@ -83,7 +79,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (table[indexIt] == null && indexIt < table.length - 1) {
+                while (indexIt < table.length - 1 && table[indexIt] == null) {
                     indexIt++;
                 }
                 return sizeIt < size;
