@@ -9,7 +9,8 @@ public class LogFilter {
         List<String> rsl = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
-                if (line.contains("404")) {
+                String[] words = line.split(" ");
+                if (words[words.length - 2].contains("404")) {
                     rsl.add(line);
                 }
             }
