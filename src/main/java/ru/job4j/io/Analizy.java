@@ -14,11 +14,11 @@ public class Analizy {
             read.lines()
                     .forEach(line -> {
                         String[] words = line.split(" ");
-                        if ((words[0].equals("400") || words[0].equals("500")) && !point.get()) {
+                        if (("400".equals(words[0]) || "500".equals(words[0])) && !point.get()) {
                             rsl.add(words[1] + ";");
                             point.set(true);
                         }
-                        if ((words[0].equals("200") || words[0].equals("300")) && point.get()) {
+                        if (("200".equals(words[0]) || "300".equals(words[0])) && point.get()) {
                             int index = rsl.size() - 1;
                             rsl.add(rsl.get(index) + words[1] + ";");
                             rsl.remove(index);
