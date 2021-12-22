@@ -9,23 +9,22 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-        String rsl = values.get(key);
-        if (rsl == null) {
-            throw new IllegalArgumentException();
-        }
-        return rsl;
+        return values.get(key);
     }
 
     private void parse(String[] args) {
-        Arrays.stream(args)
-                .forEach(line -> {
-                    line = line.replace("-", "");
-                    String[] words = line.split("=");
-                    if (words.length != 2) {
-                        throw new IllegalArgumentException();
-                    }
-                    values.put(words[0], words[1]);
-                });
+       if (args.length == 0) {
+          throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+       }
+       Arrays.stream(args)
+               .forEach(line -> {
+                   if (!line.matches("-\\S+=\\S+")) {
+                       throw new IllegalArgumentException("The pattern doesn't match : -key=value");
+                   }
+                   line = line.replace("-", "");
+                   String[] words = line.split("=");
+                   values.put(words[0], words[1]);
+               });
     }
 
     public static ArgsName of(String[] args) {
