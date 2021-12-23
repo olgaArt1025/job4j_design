@@ -18,11 +18,15 @@ public class ArgsName {
        }
        Arrays.stream(args)
                .forEach(line -> {
-                   if (!line.matches("-\\S+=\\S+")) {
+                   if (!line.startsWith("-") && !line.contains("=")) {
                        throw new IllegalArgumentException("The pattern doesn't match : -key=value");
                    }
                    line = line.replace("-", "");
                    String[] words = line.split("=");
+                   if (words.length != 2) {
+                       throw new IllegalArgumentException("The pattern doesn't match : -key=value");
+
+                   }
                    values.put(words[0], words[1]);
                });
     }

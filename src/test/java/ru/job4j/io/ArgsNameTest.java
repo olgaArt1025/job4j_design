@@ -29,4 +29,15 @@ public class ArgsNameTest {
     public void whenWrongSomeArgument() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenTwoSignsAreEqual() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-key==value"});
+    }
+
+    @Test
+    public void whenTwoSignsAreEqualAtTheEnd() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-key=value="});
+        assertThat(jvm.get("key"), is("value"));
+    }
 }
