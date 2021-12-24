@@ -17,16 +17,11 @@ public class ArgsName {
           throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
        }
        Arrays.stream(args)
+               .filter(this::check)
                .forEach(line -> {
-                   if (!line.startsWith("-") && !line.contains("=")) {
-                       throw new IllegalArgumentException("The pattern doesn't match : -key=value");
-                   }
                    line = line.replace("-", "");
+                   line = line.trim();
                    String[] words = line.split("=");
-                   if (words.length != 2) {
-                       throw new IllegalArgumentException("The pattern doesn't match : -key=value");
-
-                   }
                    values.put(words[0], words[1]);
                });
     }
@@ -35,6 +30,14 @@ public class ArgsName {
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
+    }
+
+    public boolean check(String words) {
+        if (!words.startsWith("-") || !words.contains("=") || words.startsWith("-=")
+                || !(words.indexOf("=") == words.lastIndexOf("=")) || words.endsWith("=")) {
+            throw new IllegalArgumentException("The pattern doesn't match : -key=value");
+        }
+        return true;
     }
 
     public static void main(String[] args) {

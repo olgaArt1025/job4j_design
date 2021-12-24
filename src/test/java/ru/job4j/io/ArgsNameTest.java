@@ -35,9 +35,8 @@ public class ArgsNameTest {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-key==value"});
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenTwoSignsAreEqualAtTheEnd() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-key=value="});
-        assertThat(jvm.get("key"), is("value"));
     }
 }
