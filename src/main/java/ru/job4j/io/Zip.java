@@ -8,9 +8,7 @@ import java.util.zip.ZipOutputStream;
 
 public class Zip {
     public static void packFiles(List<Path> sources, File target) {
-        try (ZipOutputStream zip = new ZipOutputStream(
-                new BufferedOutputStream(
-                        new FileOutputStream(target)))) {
+        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
             sources.forEach(file -> {
                 try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(file.toFile()))) {
                     zip.putNextEntry(new ZipEntry(file.toFile().getPath()));
@@ -46,11 +44,14 @@ public class Zip {
     }
 
     public static void main(String[] args) {
+        if (args.length != 3) {
+            throw new IllegalArgumentException("The number of arguments is not equal to 3");
+        }
         ArgsName arguments = ArgsName.of(args);
-        isValidPath(String.valueOf(arguments.get("d")));
         if (arguments.get("d") == null || arguments.get("e") == null || arguments.get("o") == null) {
             throw new IllegalArgumentException("The arguments are zero. Fill in all the arguments");
         }
+        isValidPath(String.valueOf(arguments.get("d")));
         try  {
             List<Path> paths = Search.search(new File(arguments.get("d")).toPath(), p -> p.toFile().getName().endsWith(arguments.get("e")));
             packFiles(paths, new File(arguments.get("o")));
