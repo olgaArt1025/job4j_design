@@ -19,7 +19,7 @@ public class ArgsName {
        Arrays.stream(args)
                .filter(this::check)
                .forEach(line -> {
-                   line = line.replace("-", "");
+                   line = line.substring(1);
                    line = line.trim();
                    String[] words = line.split("=");
                    values.put(words[0], words[1]);
@@ -32,9 +32,9 @@ public class ArgsName {
         return names;
     }
 
-    public boolean check(String words) {
+    private boolean check(String words) {
         if (!words.startsWith("-") || !words.contains("=") || words.startsWith("-=")
-                || !(words.indexOf("=") == words.lastIndexOf("=")) || words.endsWith("=")) {
+                || words.indexOf("=") != words.lastIndexOf("=") || words.endsWith("=")) {
             throw new IllegalArgumentException("The pattern doesn't match : -key=value");
         }
         return true;
