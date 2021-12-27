@@ -35,7 +35,6 @@ public class ConsoleChat {
             }
             if (question.equals(CONTINUE)) {
                 workChat = true;
-                continue;
             }
             if (workChat) {
                 Random random = new Random();
