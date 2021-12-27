@@ -25,18 +25,18 @@ public class ConsoleChat {
         boolean workChat = true;
         String question = "";
         Scanner chat = new Scanner(System.in);
-        while (!question.equals(OUT)) {
+        while (!OUT.equals(question)) {
             System.out.print("User: ");
             question = chat.nextLine();
             log.add("User: " + question);
-            if (question.equals(STOP)) {
+            if (STOP.equals(question)) {
                 workChat = false;
                 continue;
             }
-            if (question.equals(CONTINUE)) {
+            if (CONTINUE.equals(question)) {
                 workChat = true;
             }
-            if (workChat) {
+            if (workChat && (!OUT.equals(question))) {
                 Random random = new Random();
                 int index = random.nextInt(answers.size());
                 String answer = answers.get(index);
