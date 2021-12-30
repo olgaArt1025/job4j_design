@@ -13,7 +13,7 @@ public class CSVReader {
         String delim = argsName.get("delimiter");
         String[] filters = argsName.get("filter").split(",");
         String path = argsName.get("path");
-        String pathOut = argsName.get("stdout");
+        String pathOut = argsName.get("out");
         try (Scanner scanner = new Scanner(Paths.get(path).toFile());
              PrintWriter writer = new PrintWriter("stdout".equals(pathOut)
                      ? System.out
