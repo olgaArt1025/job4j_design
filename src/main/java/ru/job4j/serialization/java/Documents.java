@@ -1,8 +1,17 @@
 package ru.job4j.serialization.java;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "documents ")
 public class Documents {
-    private final String pts;
-    private final String  vin;
+    @XmlAttribute
+    private  String pts;
+    @XmlAttribute
+    private  String  vin;
+
+    public Documents() {
+    }
 
     public Documents(String pts, String vin) {
         this.pts = pts;
