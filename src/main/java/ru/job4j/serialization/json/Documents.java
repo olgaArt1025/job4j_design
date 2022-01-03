@@ -8,6 +8,13 @@ public class Documents {
         this.pts = pts;
         this.vin = vin;
     }
+    public String getPts() {
+        return pts;
+    }
+
+    public String getVin() {
+        return vin;
+    }
 
     @Override
     public String toString() {
