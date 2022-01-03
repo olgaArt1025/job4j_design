@@ -47,10 +47,9 @@ public class Car {
                         + "\"vin\":\"WTRC14YTI58285\""
                         + "},"
                         + "\"description\":"
-                        + "[\"\",\"blue\"]"
+                        + "[\"Volkswagen Passat B8\",\"blue\"]"
                         + "}";
         final Car carMod = gson.fromJson(personJson, Car.class);
         System.out.println(carMod);
     }
 }
-

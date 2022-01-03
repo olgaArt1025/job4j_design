@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<car age="4" automaticTransmission="false" >
+    <documents>
+        <pts>22-111</pts>
+        <vin>WTRC14YTI58285</vin>
+    </documents>
+    <descriptiones>
+        <description>Volkswagen Passat B8</description>
+        <description>blue</description>
+    </descriptiones>
+</car>
