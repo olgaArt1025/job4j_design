@@ -32,15 +32,15 @@ public class Find {
     }
 
     private static SearchFiles typeOfFind(Args args) {
-        if (args.get("t").equals("name")) {
+        if ("name".equals(args.get("t"))) {
             return new SearchFiles(x -> x.endsWith(args.get("n")));
         }
-        if (args.get("t").equals("mask")) {
+        if ("mask".equals(args.get("t"))) {
             String name = args.get("n").replaceAll("\\*", "\\.*");
             Pattern pattern = Pattern.compile(name);
             return new SearchFiles(x -> pattern.matcher(x.toString()).find());
         }
-        if (args.get("t").equals("regex")) {
+        if ("regex".equals(args.get("t"))) {
             Pattern pattern = Pattern.compile(args.get("n"));
             return new SearchFiles(x -> pattern.matcher(x.toString()).find());
         }
