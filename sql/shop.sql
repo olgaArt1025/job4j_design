@@ -47,7 +47,7 @@ join product as p
 on p.type_id=t.id
 group by t.name;
 
-select * from product where type_id = (select type.id from type where name = 'Сыр' or name = 'Молоко');
+select * from product where type_id  in (select type.id from type where name  in ('Сыр', 'Молоко'));
 
 select t.name, count(t.name)
 from type as t
@@ -55,3 +55,8 @@ join product as p
 on p.type_id=t.id
 group by t.name
 having count(t.name) < 10;
+
+select p.name as Продукты, t.name as Тип_продуктов
+from product as p
+join type as t
+on p.type_id=t.id;
