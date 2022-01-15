@@ -1,6 +1,8 @@
 package ru.job4j.jdbc;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.*;
 import java.util.Properties;
@@ -70,9 +72,12 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public void execute(String sql) throws SQLException {
-        Statement statement = connection.createStatement();
-        statement.execute(sql);
+    public void execute(String sql) {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+        } catch (Exception e) {
+        e.printStackTrace();
+        }
     }
 
 
