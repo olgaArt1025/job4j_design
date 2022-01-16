@@ -24,7 +24,7 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(line -> {
                 String[] words = line.split(";");
-                if (words.length !=2 || "".equals(words[0]) || "".equals(words[1])) {
+                if (words.length != 2 || "".equals(words[0]) || "".equals(words[1])) {
                     throw new IllegalArgumentException("Data was incorrectly entered");
                 }
                 users.add(new User(words[0], words[1]));
