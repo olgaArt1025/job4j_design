@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 public class ImportDB {
@@ -18,16 +19,18 @@ public class ImportDB {
         this.dump = dump;
     }
 
-    public List<User> load() throws IOException {
+    public List<User> load() {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines().forEach(line -> {
                 String[] words = line.split(";");
-                if (words.length != 2) {
-                    throw new IllegalArgumentException();
+                if (words.length !=2 || "".equals(words[0]) || "".equals(words[1])) {
+                    throw new IllegalArgumentException("Data was incorrectly entered");
                 }
                 users.add(new User(words[0], words[1]));
             });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return users;
     }
