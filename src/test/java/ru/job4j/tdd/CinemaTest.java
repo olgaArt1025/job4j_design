@@ -41,7 +41,7 @@ public class CinemaTest {
         Ticket ticket2 = cinema.buy(account, 1, 1, date);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void whenBuyNoAccount() {
         Account account = null;
         Cinema cinema = new Cinema3D();
@@ -50,10 +50,27 @@ public class CinemaTest {
         Ticket ticket = cinema.buy(account, 1, 1, date);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void whenNotFind() {
         Cinema cinema = new Cinema3D();
         cinema.add(new Session3D());
         List<Session> sessions = cinema.find(session -> false);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void whenTheSeatOnTheTicketDoesNotExist() {
+        Account account = null;
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 10, 10, 23, 00);
+        Ticket ticket = cinema.buy(account, 105, 1, date);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void whenDateIsNotValid() {
+        Account account = null;
+        Cinema cinema = new Cinema3D();
+        Calendar date = Calendar.getInstance();
+        date.set(2020, 02, 30, 23, 00);
     }
 }
