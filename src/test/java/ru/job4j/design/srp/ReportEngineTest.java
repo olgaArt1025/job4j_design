@@ -60,7 +60,7 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 75000);
         store.add(worker);
         Report accounting = new ReportAccounting(store);
-        double salaryUSD = worker.getSalary() / 75;
+        double salaryUSD = worker.getSalary() / ReportAccounting.RATE;
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())

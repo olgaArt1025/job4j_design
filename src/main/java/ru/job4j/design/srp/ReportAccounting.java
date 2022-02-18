@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 public class ReportAccounting implements Report {
     private Store store;
+    public static final double RATE = 75;
 
     public ReportAccounting(Store store) {
         this.store = store;
@@ -15,7 +16,7 @@ public class ReportAccounting implements Report {
         text.append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator());
         for (Employee employee : store.findBy(filter)) {
-            double salaryUSD = employee.getSalary() / 75;
+            double salaryUSD = employee.getSalary() / RATE;
             text.append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
