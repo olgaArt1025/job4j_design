@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.is;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ReportEngineTest {
@@ -97,5 +98,71 @@ public class ReportEngineTest {
                         </html>
                         """);
         assertThat(engine.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void whenReportJson() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 75000);
+        store.add(worker);
+        Report personJson = new ReportJson(store);
+        final String expect =
+                "["
+                        + "{\"name\":\""
+                        + worker.getName()
+                        + "\",\"hired\":"
+                        + "{\"year\":"
+                        + now.get(Calendar.YEAR)
+                        + ",\"month\":"
+                        + now.get(Calendar.MONTH)
+                        + ",\"dayOfMonth\":"
+                        + now.get(Calendar.DAY_OF_MONTH)
+                        + ",\"hourOfDay\":"
+                        + now.get(Calendar.HOUR_OF_DAY)
+                        + ",\"minute\":"
+                        + now.get(Calendar.MINUTE)
+                        + ",\"second\":"
+                        + now.get(Calendar.SECOND)
+                        + "},\"fired\":"
+                        + "{\"year\":"
+                        + now.get(Calendar.YEAR)
+                        + ",\"month\":"
+                        + now.get(Calendar.MONTH)
+                        + ",\"dayOfMonth\":"
+                        + now.get(Calendar.DAY_OF_MONTH)
+                        + ",\"hourOfDay\":"
+                        + now.get(Calendar.HOUR_OF_DAY)
+                        + ",\"minute\":"
+                        + now.get(Calendar.MINUTE)
+                        + ",\"second\":"
+                        + now.get(Calendar.SECOND)
+                        + "},"
+                        + "\"salary\":"
+                        + worker.getSalary()
+                        + "}"
+                        + "]";
+        assertThat(personJson.generate(em -> true), is(expect));
+    }
+
+    @Test
+    public void whenReportXml() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        Employee worker = new Employee("Ivan", now, now, 75000);
+        store.add(worker);
+        Report personXml = new ReportXml(store);
+        String expect =
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+                        + "\n<employees>\n"
+                        + "    <employee>\n"
+                        + "        <name>" + worker.getName() + "</name>\n"
+                        + "        <hired>" + dateFormat.format(now.getTime()) + "</hired>\n"
+                        + "        <fired>" + dateFormat.format(now.getTime()) + "</fired>\n"
+                        + "        <salary>" + worker.getSalary() + "</salary>\n"
+                        + "    </employee>\n"
+                        + "</employees>\n";
+        assertThat(personXml.generate(em -> true), is(expect));
     }
 }
