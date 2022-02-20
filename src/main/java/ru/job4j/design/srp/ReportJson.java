@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 public class ReportJson implements Report {
     private Store store;
-    final Gson gson = new GsonBuilder().create();
+    private final Gson gson = new GsonBuilder().create();
 
     public ReportJson(Store store) {
         this.store = store;
