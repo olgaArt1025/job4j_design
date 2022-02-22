@@ -44,10 +44,4 @@ public class Food {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    public double storage() {
-         return ((double) (LocalDate.now().toEpochDay() - getCreateDate().toEpochDay())
-                / (double) (getExpiryDate().toEpochDay() - getCreateDate().toEpochDay()));
-
-    }
-}
+  }

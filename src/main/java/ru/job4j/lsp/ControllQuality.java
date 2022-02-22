@@ -16,7 +16,8 @@ public class ControllQuality {
     public void add(Food food) {
         boolean rsl = false;
         for (Strategy strategy : strategies) {
-            if (strategy.add(food)) {
+            if (strategy.accept(food)) {
+                strategy.add(food);
                 rsl = true;
                 break;
             }

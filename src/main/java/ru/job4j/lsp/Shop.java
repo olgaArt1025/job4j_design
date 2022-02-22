@@ -4,25 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop implements Strategy {
-    List<Food> foodShop = new ArrayList<>();
-
-    public List<Food> getFoodShop() {
-        return foodShop;
-    }
+    private final List<Food> foodShop = new ArrayList<>();
 
     @Override
     public boolean add(Food foods) {
-        boolean rsl = false;
-        if (foods.storage() >= 0.25 && foods.storage() <= 0.75) {
+        boolean rsl = accept(foods);
+        if (rsl) {
+            if (storage(foods) > 0.75) {
+                foods.setPrice(foods.getPrice() * foods.getDiscount());
+            }
             foodShop.add(foods);
-            rsl = true;
-        }
-        if (foods.storage() > 0.75) {
-            discount(foods);
-            foodShop.add(foods);
-            rsl = true;
         }
         return rsl;
+    }
+
+    @Override
+    public boolean accept(Food food) {
+        return storage(food) > 0.25 && storage(food) <= 1;
     }
 
     @Override
@@ -30,7 +28,8 @@ public class Shop implements Strategy {
         foodShop.remove(foods);
     }
 
-    public void discount(Food foods) {
-       foods.setPrice(foods.getPrice() * foods.getDiscount());
+    @Override
+    public List<Food> getAll() {
+        return List.copyOf(foodShop);
     }
 }

@@ -16,14 +16,15 @@ public class ControllQualityTest {
         Shop shop = new Shop();
         Warehouse warehouse = new Warehouse();
         ControllQuality controller = new ControllQuality(List.of(trash, shop, warehouse));
+        LocalDate now = LocalDate.now();
         Food cheese = new Cheese("Bri",
-                LocalDate.of(2022, 4, 1),
-                LocalDate.of(2022, 1, 10),
+                now.plusDays(30),
+                now.minusDays(18),
                 70, 0.5);
         controller.add(cheese);
-        assertThat(shop.getFoodShop().size(), is(1));
-        assertThat(trash.getFoodTrash().size(), is(0));
-        assertThat(warehouse.getFoodWarehouse().size(), is(0));
+        assertThat(shop.getAll().size(), is(1));
+        assertThat(trash.getAll().size(), is(0));
+        assertThat(warehouse.getAll().size(), is(0));
     }
 
     @Test
@@ -32,15 +33,16 @@ public class ControllQualityTest {
         Shop shop = new Shop();
         Warehouse warehouse = new Warehouse();
         ControllQuality controller = new ControllQuality(List.of(trash, shop, warehouse));
+        LocalDate now = LocalDate.now();
         Food cookies = new Bakery("Cookies",
-                LocalDate.of(2022, 2, 25),
-                LocalDate.of(2022, 1, 22),
+                now.plusDays(5),
+                now.minusDays(30),
                 200, 0.5);
         controller.add(cookies);
-        assertThat(shop.getFoodShop().size(), is(1));
-        assertThat(shop.getFoodShop().get(0).getPrice(), is(100.0));
-        assertThat(trash.getFoodTrash().size(), is(0));
-        assertThat(warehouse.getFoodWarehouse().size(), is(0));
+        assertThat(shop.getAll().size(), is(1));
+        assertThat(shop.getAll().get(0).getPrice(), is(100.0));
+        assertThat(trash.getAll().size(), is(0));
+        assertThat(warehouse.getAll().size(), is(0));
     }
 
     @Test
@@ -60,9 +62,9 @@ public class ControllQualityTest {
                 47.50, 0.4);
         controller.add(bread);
         controller.add(donuts);
-        assertThat(shop.getFoodShop().size(), is(0));
-        assertThat(trash.getFoodTrash().size(), is(0));
-        assertThat(warehouse.getFoodWarehouse().size(), is(2));
+        assertThat(shop.getAll().size(), is(0));
+        assertThat(trash.getAll().size(), is(0));
+        assertThat(warehouse.getAll().size(), is(2));
     }
 
     @Test
@@ -73,12 +75,12 @@ public class ControllQualityTest {
         ControllQuality controller = new ControllQuality(List.of(trash, shop, warehouse));
         LocalDate now = LocalDate.now();
         Food bread = new Bakery("Bread",
-                now,
-                now.minusDays(3),
+                now.minusDays(1),
+                now.minusDays(4),
                 52.30, 0.7);
         controller.add(bread);
-        assertThat(shop.getFoodShop().size(), is(0));
-        assertThat(trash.getFoodTrash().size(), is(1));
-        assertThat(warehouse.getFoodWarehouse().size(), is(0));
+        assertThat(shop.getAll().size(), is(0));
+        assertThat(trash.getAll().size(), is(1));
+        assertThat(warehouse.getAll().size(), is(0));
     }
 }
