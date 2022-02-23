@@ -4,8 +4,10 @@ public interface Parking {
 
     boolean parkTheCar(Car car);
 
-    int freeParking();
+    void freeParking(Car car);
 
-    int freeParkingTruck();
+    void freeParkingTruck(Car car);
+
+    int countedCarsInParking();
 
 }

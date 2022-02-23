@@ -12,7 +12,8 @@ public class Truck extends Car {
 
     @Override
     public void validate(int size) {
-        if (size != 1) {
+        if (size < 2) {
+            System.out.println("Incorrect size of the truck");
             throw new IllegalArgumentException();
         }
     }

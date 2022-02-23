@@ -7,6 +7,7 @@ public abstract class Car {
 
     public Car(String model, int size, String number) {
         this.model = model;
+        validate(size);
         this.size = size;
         this.number = number;
     }
@@ -21,10 +22,6 @@ public abstract class Car {
 
     public int getSize() {
         return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public String getNumber() {
