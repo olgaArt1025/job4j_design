@@ -2,7 +2,7 @@ package ru.job4j.lsp.parking;
 
 public class PassengerCar extends Car {
     private String  model;
-    private static final int SIZE = 1;
+    public static final int SIZE = 1;
     private String number;
 
     public PassengerCar(String model, String number) {

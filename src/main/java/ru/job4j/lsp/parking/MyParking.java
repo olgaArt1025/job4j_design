@@ -23,41 +23,45 @@ public class MyParking implements Parking {
 
     @Override
     public boolean parkTheCar(Car car) {
-        int s = car.getSize();
+        int size = car.getSize();
         boolean rsl = false;
-        if (s == 1) {
-            freeParking(car);
-            cars.add(car);
-            rsl = true;
+        if (size == PassengerCar.SIZE) {
+            if (freeParking(car)) {
+                cars.add(car);
+                rsl = true;
+            }
         }
-        if (s > 1) {
-            freeParkingTruck(car);
-            cars.add(car);
-            rsl = true;
+        if (size > PassengerCar.SIZE) {
+            if (freeParkingTruck(car)) {
+                cars.add(car);
+                rsl = true;
+            }
         }
         return rsl;
     }
 
     @Override
-    public void freeParking(Car car) {
+    public boolean freeParking(Car car) {
+        boolean result = false;
         if (parkingPlacePassenger > 0) {
             parkingPlacePassenger = parkingPlacePassenger - car.getSize();
-        } else {
-            System.out.println("There are no parking spaces");
-            throw new IllegalArgumentException();
+            result = true;
+
         }
+        return result;
     }
 
     @Override
-    public void freeParkingTruck(Car car) {
+    public boolean freeParkingTruck(Car car) {
+        boolean result = false;
         if (parkingPlaceTruck > 0) {
             parkingPlaceTruck = parkingPlaceTruck - 1;
+            result = true;
         } else if (parkingPlacePassenger >= car.getSize()) {
             parkingPlacePassenger = parkingPlacePassenger - car.getSize();
-        } else {
-            System.out.println("There are no parking spaces");
-            throw new IllegalArgumentException();
+            result = true;
         }
+        return result;
     }
 
     @Override

@@ -35,11 +35,11 @@ public class MyParkingTest {
         assertThat(myParking.getParkingPlacePassenger(), is(0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void whenParkTruckWithSize4AtCarPlaceThenFalse() {
         MyParking parking = new MyParking(0, 2);
         Truck truck = new Truck("Mercedes-Benz Actros", 4, "V124NW");
-       parking.parkTheCar(truck);
+        assertFalse(parking.parkTheCar(truck));
     }
 
     @Test
