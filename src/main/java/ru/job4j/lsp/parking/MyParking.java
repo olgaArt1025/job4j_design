@@ -12,18 +12,32 @@ public class MyParking implements Parking {
         this.parkingPlacePassenger = parkingPlacePassenger;
     }
 
+    public int getParkingPlaceTruck() {
+        return parkingPlaceTruck;
+    }
+
+    public int getParkingPlacePassenger() {
+        return parkingPlacePassenger;
+    }
+
     @Override
     public boolean parkTheCar(Car car) {
         return false;
     }
 
     @Override
-    public int freeParking() {
-        return 0;
+    public void freeParking(Car car) {
+
     }
 
     @Override
-    public int freeParkingTruck() {
+    public void freeParkingTruck(Car car) {
+
+    }
+
+    @Override
+    public int countedCarsInParking() {
         return 0;
     }
+
 }
