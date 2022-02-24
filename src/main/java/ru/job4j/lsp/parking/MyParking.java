@@ -25,17 +25,12 @@ public class MyParking implements Parking {
     public boolean parkTheCar(Car car) {
         int size = car.getSize();
         boolean rsl = false;
-        if (size == PassengerCar.SIZE) {
-            if (freeParking(car)) {
-                cars.add(car);
-                rsl = true;
-            }
-        }
-        if (size > PassengerCar.SIZE) {
-            if (freeParkingTruck(car)) {
-                cars.add(car);
-                rsl = true;
-            }
+        if (size == PassengerCar.SIZE && freeParking(car)) {
+            cars.add(car);
+            rsl = true;
+        } else if (size > PassengerCar.SIZE && freeParkingTruck(car)) {
+            cars.add(car);
+            rsl = true;
         }
         return rsl;
     }
