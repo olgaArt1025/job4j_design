@@ -21,6 +21,11 @@ public class Warehouse implements Strategy {
     }
 
     @Override
+    public void clear() {
+        foodWarehouse.clear();
+    }
+
+    @Override
     public void delete(Food foods) {
         foodWarehouse.remove(foods);
     }

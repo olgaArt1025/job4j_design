@@ -13,6 +13,8 @@ public interface Strategy {
 
     boolean accept(Food food);
 
+    void clear();
+
     default double storage(Food food) {
         return ((double) (LocalDate.now().toEpochDay() - food.getCreateDate().toEpochDay())
                 / (double) (food.getExpiryDate().toEpochDay() - food.getCreateDate().toEpochDay()));

@@ -24,6 +24,11 @@ public class Shop implements Strategy {
     }
 
     @Override
+    public void clear() {
+        foodShop.clear();
+    }
+
+    @Override
     public void delete(Food foods) {
         foodShop.remove(foods);
     }

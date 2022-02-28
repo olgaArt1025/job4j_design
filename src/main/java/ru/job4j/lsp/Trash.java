@@ -21,6 +21,11 @@ public class Trash implements Strategy {
     }
 
     @Override
+    public void clear() {
+        foodTrash.clear();
+    }
+
+    @Override
     public void delete(Food foods) {
         foodTrash.remove(foods);
     }

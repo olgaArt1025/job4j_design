@@ -1,5 +1,6 @@
 package ru.job4j.lsp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControllQuality {
@@ -26,6 +27,17 @@ public class ControllQuality {
             System.out.println(food.getName() + " redistributed to storage");
         } else {
             throw new IllegalArgumentException(food.getName() + " unallocated in storage");
+        }
+    }
+
+    public void resort() {
+        List<Food> products = new ArrayList<>();
+        for (Strategy strategy : strategies) {
+            products.addAll(strategy.getAll());
+            strategy.clear();
+        }
+        for (Food product : products) {
+            add(product);
         }
     }
 }
