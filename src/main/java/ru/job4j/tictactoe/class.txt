@@ -1,0 +1,13 @@
+Список классов, составляющих базовые элементы программы:
+	
+interface Logic - определяет логику игры
+class StandardLogic implements Logic - определяет стандартную логику игры
+class Moving - класс, содержащий метод для определенной возможности перемещения
+interface Input	- ввод данных
+class UserInput implements Input - 	ввод данных пользователями
+interface Output - 	вывод данных
+class СonsoleOutput implements Output - 	вывод на консоль.
+class Figure - 	класс,  описывающий фигуры (Х,О)
+class FieldOfPlay - 	класс, описывающий игровое поле
+class Cell  - 	клас, отображающий состояние ячейки.
+class StartTicTacToe -	начало игры
