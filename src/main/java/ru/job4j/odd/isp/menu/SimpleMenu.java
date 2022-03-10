@@ -14,8 +14,7 @@ public class SimpleMenu implements Menu {
             rsl = true;
         } else {
             Optional<ItemInfo> parentInfo = findItem(parentName);
-            Optional<ItemInfo> childInfo = findItem(childName);
-            if (parentInfo.isPresent() && childInfo.isEmpty()) {
+            if (parentInfo.isPresent() && findItem(childName).isEmpty()) {
                 MenuItem childItem = new SimpleMenuItem(childName, actionDelegate);
                 parentInfo.get().menuItem.getChildren().add(childItem);
                 rsl = true;
@@ -26,7 +25,7 @@ public class SimpleMenu implements Menu {
 
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
-       return  findItem(itemName).map(item -> new MenuItemInfo(item.menuItem, item.number));
+        return findItem(itemName).map(item -> new MenuItemInfo(item.menuItem, item.number));
     }
 
     @Override
